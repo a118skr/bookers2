@@ -1,0 +1,47 @@
+<main>
+<p id="notice"></p>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-3'>
+    <!--部分テンプレート-->
+        <%= render 'userinfo', user: @user, book: @book_new %>
+      </div>
+
+
+      <div class='col-md-8 offset-md-1'>
+        <h2>Book detail</h2>
+        <table class='table'>
+          <tr>
+
+            <td>
+              <%= link_to user_path(@book.user_id) do %>
+              <%= image_tag @book.user.get_profile_image(100,100) %><br>
+              <%= @book.user.name %>
+              <% end %>
+            </td>
+
+            <td>
+              <%= link_to book_path(@book.id) do %>
+              <%= @book.title %>
+              <% end %>
+            </td>
+            <td>
+              <%= @book.body %>
+            </td>
+
+            <% if @book.user_id == current_user.id %>
+            <td>
+              <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+            </td>
+            <td>
+              <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に消しますか？"  %>
+            </td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+
